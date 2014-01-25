@@ -39,10 +39,8 @@ start:
 
 
 // Insert your code down here:
-
 	char * algorithms[] = {"Jacobi", "Gauss-Seidel", "Gaussian elimination", "LU decomposition"};
-	int select;
-    select = pop_menu(algorithms,"Select Algorithm:",4,0,0);
+    int select = pop_menu(algorithms,"Select Algorithm:",4,0,0);
 	switch (select)
 	{
 		case 0:
