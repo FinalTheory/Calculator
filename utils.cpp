@@ -6,14 +6,6 @@ int gcd( int a, int b )
 	return gcd(b, a % b);
 }
 
-void swap( int & a, int & b )
-{
-	int tmp;
-	tmp = a;
-	a = b;
-	b = tmp;
-}
-
 Fraction getFraction( double val )
 {
 	char tmp[16];

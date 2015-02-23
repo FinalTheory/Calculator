@@ -31,7 +31,8 @@ void Jacobi();
 void Gauss_Seidel();
 void LU_solve();
 void Gaussian_elimination();
-void TestFunction();
+void Test_Function();
+void Romberg();
 
 /*********************************************************/
 
@@ -50,13 +51,14 @@ start:
 
 // Insert your code down here:
 	char * algorithms[] = {
-	    "Jacobi",
-	    "Gauss-Seidel",
-	    "Gaussian elimination",
-	    "LU decomposition",
+	    "Jacobi iter",
+	    "Gauss Seidel iter",
+	    "Gaussian Elimination",
+	    "LU Decomposition",
+	    "Romberg Integration",
 	    "Test Function"
     };
-    int select = pop_menu(algorithms, "Select Algorithm:", 5, 0, 0);
+    int select = pop_menu(algorithms, "Select Algorithm:", 6, 0, 0);
 	switch (select)
 	{
 		case 0:
@@ -72,7 +74,10 @@ start:
 			LU_solve();
 			break;
         case 4:
-            TestFunction();
+            Romberg();
+            break;
+        case 5:
+            Test_Function();
             break;
 		default:
 			cout.clear();

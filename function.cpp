@@ -156,35 +156,16 @@ double Function :: operator()( double x ) {
     this->func_error = false;
     double cur_val, val_a, val_b;
     unsigned char real_expr[FUNC_LEN], oper, comma[2] = {KEY_CHAR_COMMA, 0};
-    unsigned char buf[32];
 
-    // Put real value into expr
     // First insert the left comma
     strcpy((char *)real_expr, (char *)comma);
-    // Then find the position of X
-    int var_x_pos = -1;
-    for ( unsigned i = 0; i < strlen((char *)this->func_expr); i++ ) {
-        if ( this->func_expr[i] == KEY_CHAR_X ) {
-            var_x_pos = i;
-            break;
-        }
-    }
-    // If not found, just copy the expr
-    if ( var_x_pos == -1 ) {
-        strcat((char *)real_expr, (char *)this->func_expr);
-    } else {
-        this->func_expr[var_x_pos] = 0;
-        strcat((char *)real_expr, (char *)this->func_expr);
-        // Convert the float number to the button sequence
-        sprintf((char *)buf, "%.4f", x); str2num(buf);
-        strcat((char *)real_expr, (char *)buf);
-        strcat((char *)real_expr, (char *)(this->func_expr + var_x_pos + 1));
-        this->func_expr[var_x_pos] = KEY_CHAR_X;
-    }
+    // Then copy the expr
+    strcat((char *)real_expr, (char *)this->func_expr);
     // Finally insert the right comma
     strcat((char *)real_expr, (char *)comma);
 
     // Until here, all the expr sequence should be right
+    // Add a test here
     // output_names(real_expr);
 
     stack<unsigned char> oper_stk;
@@ -193,8 +174,11 @@ double Function :: operator()( double x ) {
     oper_stk.push(real_expr[0]);
     unsigned char *p = real_expr + 1;
     while ( *p ) {
-        // If this is a digit, then just read the float number
-        if ( is_digit(*p) ) {
+        // If this is a variable, just push the corresponding value
+        if ( *p == KEY_CHAR_X ) {
+            num_stk.push(x); p++;
+        } else if ( is_digit(*p) ) {
+            // If this is a digit, then just read the float number
             p = Function::read_number(p, cur_val);
             num_stk.push(cur_val);
         } else {

@@ -109,6 +109,14 @@ public:
 ostream & endl( ostream & os );
 ostream & space( ostream & os );
 
+// swap function
+template <typename Any>
+void swap(Any & a, Any & b) {
+    Any tmp;
+    tmp = a;
+    a = b;
+    b = tmp;
+}
 
 // Clear selected area
 void area_clear (int left,int top,int right,int bottom,int sel);
