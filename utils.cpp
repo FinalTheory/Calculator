@@ -1,6 +1,3 @@
-extern "C"
-{
-
 #include "def.h"
 
 int gcd( int a, int b )
@@ -84,6 +81,4 @@ Fraction operator /( struct Fraction a, struct Fraction b )
 {
 	swap(b.up, b.down);
 	return a * b;
-}
-
 }

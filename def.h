@@ -1,3 +1,6 @@
+#ifndef DEF_H
+#define DEF_H
+
 /*
 Basic IO Usage
 
@@ -10,25 +13,30 @@ Basic IO Usage
 
 */
 
-extern "C"
-{
-#ifndef DEF_H
-#define DEF_H
-// Depends on the calculator screen
+// Depends on the calculator screen size
 #define ROWS 8
 #define COLS 21
 #define MAX_ROWS 64
 
-#define IO_LEN 64
+#define IO_LEN 128
 #define MAX_LEN MAX_ROWS * COLS + 1
 
 #define PI 3.14159265
 #define CLR(arr,val) memset(arr,val,sizeof(arr))
 
-#include <stdio.h>
-#include <string.h>
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
 #include <stdlib.h>
-#include "fxlib.h"
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
+#include "function.h"
+
 
 struct Fraction
 {
@@ -62,9 +70,14 @@ public:
 	istream();
 	void clear();
 	void pause();
-	istream & operator >> ( double & val );
+	istream & operator >> ( double & );
+	istream & operator >> ( Function & );
 
+private:
 	unsigned char buffer[IO_LEN];
+	unsigned char * get_key_name( unsigned int );
+	// Flush all the data in buffer to screen
+	void flush_buffer();
 };
 
 class ostream
@@ -106,15 +119,4 @@ int pop_menu (char *context[],char *title,int max,int x,int y);
 extern ostream cout;
 extern istream cin;
 
-/*********************************************************/
-
-void Jacobi();
-void Gauss_Seidel();
-void LU_solve();
-void Gaussian_elimination();
-
-/*********************************************************/
-
 #endif // DEF_H
-
-}

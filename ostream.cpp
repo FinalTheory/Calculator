@@ -1,6 +1,3 @@
-extern "C"
-{
-
 #include "def.h"
 
 ostream cout;
@@ -144,7 +141,7 @@ void area_clear (int left,int top,int right,int bottom,int sel)
     DISPBOX box;
     box.left = left; box.top = top; box.right = right; box.bottom = bottom;
     if (sel != 1) Bdisp_AreaClr_DDVRAM (&box);
-    if (sel != 0){
+    if (sel != 0) {
 		Bdisp_DrawLineVRAM (box.left,box.top,box.right,box.top);
 		Bdisp_DrawLineVRAM (box.left,box.bottom,box.right,box.bottom);
 		Bdisp_DrawLineVRAM (box.left,box.top,box.left,box.bottom);
@@ -154,40 +151,38 @@ void area_clear (int left,int top,int right,int bottom,int sel)
 
 int pop_menu (char *context[],char *title,int max,int x,int y)
 {
-    int width,height,i,l,redraw = 1,index = 0;
+    int width, height, i, l, redraw = 1, index = 0;
     unsigned int key;
-    height = (max+1) * 8;
+    height = ( max + 1 ) * 8;
     width = strlen(title);
-    for (i=0;i<max;++i){
-	l = strlen(context[i]);
-	if (l>width) width = l;
+    for ( i = 0; i < max; ++i ) {
+        l = strlen(context[i]);
+        if ( l > width ) width = l;
     }
     width *= 6;
     area_clear(x,y,x+width+2,y+height+1,2);
     PrintXY (x+1,y+1,(unsigned char*)title,0);
     Bdisp_AreaReverseVRAM (x+1,y+1,x+width+1,y+8);
     while (1){
-	if (redraw){
-	    redraw = 0;
-	    area_clear(x+1,y+9,x+width+1,y+height,0);
-	    for (i=0;i<max;++i)
-		PrintXY(x+1,y+1+(i+1)*8,(unsigned char *)context[i],0);
-	    Bdisp_AreaReverseVRAM(x+1,y+1+(index+1)*8,x+width+1,y+(index+2)*8);
-	}
-	GetKey(&key);
-	if (key==KEY_CTRL_UP){
-	   	index--;
-	    if (index<0) index = max-1;
-	    redraw = 1;
-	}
-	else if (key==KEY_CTRL_DOWN){
-	   index++;
-	   if (index>=max) index = 0;
-	    redraw = 1;
-	}
-	else if (key==KEY_CTRL_EXIT) return -1;
-	else if (key==KEY_CTRL_EXE) return index;
+        if (redraw) {
+            redraw = 0;
+            area_clear(x+1,y+9,x+width+1,y+height,0);
+            for (i=0;i<max;++i)
+            PrintXY(x+1,y+1+(i+1)*8,(unsigned char *)context[i],0);
+            Bdisp_AreaReverseVRAM(x+1,y+1+(index+1)*8,x+width+1,y+(index+2)*8);
+        }
+        GetKey(&key);
+        if (key==KEY_CTRL_UP){
+            index--;
+            if (index<0) index = max-1;
+            redraw = 1;
+        }
+        else if (key==KEY_CTRL_DOWN){
+           index++;
+           if (index>=max) index = 0;
+            redraw = 1;
+        }
+        else if (key==KEY_CTRL_EXIT) return -1;
+        else if (key==KEY_CTRL_EXE) return index;
     }
-}
-
 }

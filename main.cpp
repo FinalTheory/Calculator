@@ -1,5 +1,4 @@
-extern "C"
-{
+#include "def.h"
 
 /*****************************************************************/
 /*                                                               */
@@ -10,8 +9,6 @@ extern "C"
 /*   Copyright (c) 2006 CASIO COMPUTER CO., LTD.                 */
 /*                                                               */
 /*****************************************************************/
-
-#include "def.h"
 
 //****************************************************************************
 //  AddIn_main (Sample program main function)
@@ -28,7 +25,20 @@ extern "C"
 //
 //
 
+/*********************************************************/
 
+void Jacobi();
+void Gauss_Seidel();
+void LU_solve();
+void Gaussian_elimination();
+void TestFunction();
+
+/*********************************************************/
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
 
 int AddIn_main(int isAppli, unsigned short OptionNum)
 {
@@ -39,8 +49,14 @@ start:
 
 
 // Insert your code down here:
-	char * algorithms[] = {"Jacobi", "Gauss-Seidel", "Gaussian elimination", "LU decomposition"};
-    int select = pop_menu(algorithms,"Select Algorithm:",4,0,0);
+	char * algorithms[] = {
+	    "Jacobi",
+	    "Gauss-Seidel",
+	    "Gaussian elimination",
+	    "LU decomposition",
+	    "Test Function"
+    };
+    int select = pop_menu(algorithms, "Select Algorithm:", 5, 0, 0);
 	switch (select)
 	{
 		case 0:
@@ -55,12 +71,14 @@ start:
 		case 3:
 			LU_solve();
 			break;
+        case 4:
+            TestFunction();
+            break;
 		default:
 			cout.clear();
 			cout << "Not avaliable, so sorry for this." << endl;
 			cout << "Press EXE or EXIT to return." << endl;
 	}
-
 
 // Return to the beginning after process
 	while (1)
@@ -72,8 +90,9 @@ start:
     return 1;
 }
 
-
-
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 //****************************************************************************
 //**************                                              ****************
@@ -106,5 +125,3 @@ int InitializeSystem(int isAppli, unsigned short OptionNum)
 }
 
 #pragma section
-
-}
