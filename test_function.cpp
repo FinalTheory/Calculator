@@ -25,11 +25,16 @@ void Test_Function()
             return;
         } else if ( key == KEY_CTRL_EXE ) {
             cout.clear();
-            cout << "Please input your function:" << endl;
-            cout << "f(x) = " << endl;
+            cout << "Please input your function and x:" << endl;
+            cout << "f(x) = ?" << endl;
             Function f;
             cin >> f;
-            cout << setprecision(6) << f(1.5) << endl;
+            double x, res;
+            cout << "x = ?" << endl;
+            cin >> x; res = f(x);
+            cout.clear();
+            if ( f.error() ) cout << "Syntax Error!" << endl;
+            else cout << "f(x) = " << setprecision(6) << f(x) << endl;
         } else {
             continue;
         }

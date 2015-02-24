@@ -12,6 +12,7 @@ public:
 	istream();
 	void clear();
 	void pause();
+	istream & operator >> ( int & );
 	istream & operator >> ( double & );
 	istream & operator >> ( Function & );
 

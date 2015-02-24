@@ -45,6 +45,7 @@ void LU_solve();
 void Gaussian_elimination();
 void Test_Function();
 void Romberg();
+void Newton_Interp();
 
 /*********************************************************/
 
@@ -63,37 +64,40 @@ start:
 
 // Insert your code down here:
 	char * algorithms[] = {
+	    "LU Decomposition",
 	    "Jacobi iteration",
 	    "GaussSeidel iter",
-	    "LU Decomposition",
-	    "Gaussian Elimination",
 	    "Romberg Integration",
+	    "Gaussian Elimination",
+	    "Newton Interpolation",
 	    "Test Function",
 	    "Test entry 1",
 	    "Test entry 2",
 	    "Test entry 3",
 	    "Test entry 4",
-	    "Test entry 5",
     };
     int select = pop_menu(algorithms, "Select Algorithm:", 11, 2, 3);
 	switch (select)
 	{
 		case 0:
-			Jacobi();
-			break;
-		case 1:
-			Gauss_Seidel();
-			break;
-		case 2:
 		    LU_solve();
 			break;
+		case 1:
+		    Jacobi();
+			break;
+		case 2:
+		    Gauss_Seidel();
+			break;
 		case 3:
-			Gaussian_elimination();
+		    Romberg();
 			break;
         case 4:
-            Romberg();
+            Gaussian_elimination();
             break;
         case 5:
+            Newton_Interp();
+            break;
+        case 6:
             Test_Function();
             break;
 		default:
