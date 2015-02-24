@@ -21,6 +21,8 @@ Basic IO Usage
 
 #define IO_LEN 128
 
+#define MAX_MAT 8
+
 #define PI 3.14159265
 #define CLR(arr,val) memset(arr,val,sizeof(arr))
 

@@ -1,10 +1,9 @@
 #include "fraction.h"
 #include "istream.h"
 #include "ostream.h"
+#include "array.h"
 
-static Fraction A[8][8], b[8];
-
-int Gauss_input()
+int Gauss_input( Array_2D<Fraction> & A, Array_1D<Fraction> & b )
 {
 	double tmp;
 	cout.clear();
@@ -29,7 +28,7 @@ int Gauss_input()
 	return n;
 }
 
-void Gauss_output( int n )
+void Gauss_output( int n, Array_2D<Fraction> & A, Array_1D<Fraction> & b )
 {
 	cout << "A = " << endl;
 	for ( int i = 1; i <= n; ++i )
@@ -46,7 +45,9 @@ void Gauss_output( int n )
 
 void Gaussian_elimination()
 {
-	int n = Gauss_input();
+    Array_2D<Fraction> A(MAX_MAT, MAX_MAT);
+    Array_1D<Fraction> b(MAX_MAT);
+	int n = Gauss_input(A, b);
 	cout.clear();
 	for ( int k = 1; k <= n - 1; ++k )
 	{
@@ -59,7 +60,7 @@ void Gaussian_elimination()
 			b[i] = b[i] - b[k] * m;
 		}
 		cout << "Step NO." << k << ":" << endl;
-		Gauss_output(n);
+		Gauss_output(n, A, b);
 	}
 	// back substitution
 	for ( int i = n; i >= 1; --i )

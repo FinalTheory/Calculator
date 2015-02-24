@@ -22,6 +22,7 @@ istream::istream() {
 }
 
 unsigned char * istream::get_key_name( unsigned int key ) {
+    unsigned char _minus[2] = {KEY_CHAR_PMINUS, 0};
     switch ( key ) {
         case KEY_CHAR_PLUS:
             return "+";
@@ -52,7 +53,7 @@ unsigned char * istream::get_key_name( unsigned int key ) {
         case KEY_CHAR_ROOT:
             return "sqrt(";
         case KEY_CHAR_PMINUS:
-            return "(-)";
+            return _minus;
         case KEY_CHAR_DP:
             return ".";
         case KEY_CHAR_0:

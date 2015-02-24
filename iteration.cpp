@@ -1,5 +1,6 @@
 #include "istream.h"
 #include "ostream.h"
+#include "array.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -12,9 +13,8 @@ extern "C"
 }
 #endif // __cplusplus
 
-static double A[8][8], b[8], x[8], x_prev[8];
-
-void iter_input( int & n, int & max_steps )
+void iter_input( int & n, int & max_steps,
+                Array_2D<double> & A, Array_1D<double> & b )
 {
 	double tmp;
 	cout.clear();
@@ -41,7 +41,7 @@ void iter_input( int & n, int & max_steps )
 	}
 }
 
-void iter_output( int n, int step )
+void iter_output( int n, int step, Array_1D<double> & x )
 {
 	cout << "Step NO." << step << ":" << endl;
 	for ( int i = 1; i <= n; ++i ) cout << x[i] << space;
@@ -50,13 +50,15 @@ void iter_output( int n, int step )
 
 void Jacobi()
 {
+    Array_1D<double> b(MAX_MAT), x_prev(MAX_MAT), x(MAX_MAT);
+    Array_2D<double> A(MAX_MAT, MAX_MAT);
 	double sum;
 	int n, max_steps;
-	iter_input(n, max_steps);
+	iter_input(n, max_steps, A, b);
 	cout.clear();
 	cout << setprecision(4);
 	for ( int i = 1; i <= n; ++i ) x_prev[i] = x[i] = 0.;
-	iter_output(n, 0);
+	iter_output(n, 0, x);
 	for ( int k = 1; k <= max_steps; ++k )
 	{
 		for ( int i = 1; i <= n; ++i )
@@ -66,8 +68,8 @@ void Jacobi()
 				sum += A[i][j] * x_prev[j];
 			x[i] = ( b[i] - sum ) / A[i][i];
 		}
-		iter_output(n, k);
-		memcpy( x_prev, x, sizeof(x_prev) );
+		iter_output(n, k, x);
+		x_prev = x;
 	}
 	cout.display();
 }
@@ -75,13 +77,15 @@ void Jacobi()
 
 void Gauss_Seidel()
 {
+    Array_1D<double> b(MAX_MAT), x_prev(MAX_MAT), x(MAX_MAT);
+    Array_2D<double> A(MAX_MAT, MAX_MAT);
 	double sum1, sum2;
 	int n, max_steps;
-	iter_input(n, max_steps);
+	iter_input(n, max_steps, A, b);
 	cout.clear();
 	cout << setprecision(4);
 	for ( int i = 1; i <= n; ++i ) x_prev[i] = x[i] = 0.;
-	iter_output(n, 0);
+	iter_output(n, 0, x);
 	for ( int k = 1; k <= max_steps; ++k )
 	{
 		sum1 = 0.;
@@ -97,8 +101,8 @@ void Gauss_Seidel()
 		sum1 = 0.;
 		for ( int j = 1; j <= n - 1; ++j ) sum1 += A[n][j] * x[j];
 		x[n] = ( b[n] - sum1 ) / A[n][n];
-		iter_output(n, k);
-		memcpy( x_prev, x, sizeof(x_prev) );
+		iter_output(n, k, x);
+		x_prev = x;
 	}
 	cout.display();
 }

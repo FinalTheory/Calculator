@@ -58,6 +58,7 @@ void output_names( unsigned char * func ) {
 unsigned char str2btn( char *str ) {
     if ( strcmp(str, "+") == 0 ) return KEY_CHAR_PLUS;
     if ( strcmp(str, "-") == 0 ) return KEY_CHAR_MINUS;
+    if ( strcmp(str, "(-)") == 0 ) return KEY_CHAR_PMINUS;
     if ( strcmp(str, "*") == 0 ) return KEY_CHAR_MULT;
     if ( strcmp(str, "/") == 0 ) return KEY_CHAR_DIV;
     if ( strcmp(str, "^") == 0 ) return KEY_CHAR_POW;

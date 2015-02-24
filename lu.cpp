@@ -1,10 +1,9 @@
 #include "fraction.h"
 #include "istream.h"
 #include "ostream.h"
+#include "array.h"
 
-static Fraction A[8][8], b[8];
-
-int LU_input()
+int LU_input( Array_2D<Fraction> & A, Array_1D<Fraction> & b )
 {
 	double tmp;
 	cout.clear();
@@ -29,7 +28,7 @@ int LU_input()
 	return n;
 }
 
-void LU_output( int n )
+void LU_output( int n, Array_2D<Fraction> & A, Array_1D<Fraction> & b )
 {
 	cout.clear();
 	cout << "LU = " << endl;
@@ -47,7 +46,9 @@ void LU_output( int n )
 
 void LU_solve()
 {
-	int n = LU_input();
+    Array_2D<Fraction> A(MAX_MAT, MAX_MAT);
+    Array_1D<Fraction> b(MAX_MAT);
+	int n = LU_input(A, b);
 	// LU factorization
 	Fraction sum;
 	for ( int k = 1; k <= n; ++k )
@@ -86,5 +87,5 @@ void LU_solve()
 			sum = sum + A[k][j] * b[j];
 		b[k] = ( b[k] - sum ) / A[k][k];
 	}
-	LU_output(n);
+	LU_output(n, A, b);
 }

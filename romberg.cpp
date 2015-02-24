@@ -1,6 +1,7 @@
 #include "istream.h"
 #include "ostream.h"
 #include "function.h"
+#include "array.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -14,8 +15,7 @@ extern "C"
 }
 #endif // __cplusplus
 
-const int MAX = 12;
-double DP[MAX][MAX];
+static const int MAX = 12;
 
 int _pow( int x, int n )
 {
@@ -37,11 +37,11 @@ double calc( Function & f, double a, double b, double prev, int k )
 	return res;
 }
 
-double worker( Function & f, double a, double b )
+double worker( Function & f, double a, double b, Array_2D<double> & DP )
 {
 	int m, k, i;
 	double tmp;
-	CLR(DP, 0);
+	DP.clear();
 	i = 1;
 	DP[0][0] = ( f(a) + f(b) ) * ( b - a ) / 2.;
 	while ( i < MAX ) {
@@ -68,6 +68,7 @@ double worker( Function & f, double a, double b )
 
 void Romberg()
 {
+    Array_2D<double> DP(MAX, MAX);
     double a, b, res;
     Function f;
     while ( true ) {
@@ -92,7 +93,7 @@ void Romberg()
     cin >> b;
     cout.clear();
     if ( a > b ) swap(a, b);
-    res = worker(f, a, b);
+    res = worker(f, a, b, DP);
     cout << setprecision(8) << "Final result: " << res << endl;
     cout.display();
 }
