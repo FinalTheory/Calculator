@@ -85,10 +85,10 @@ start:
 			Gauss_Seidel();
 			break;
 		case 2:
-			Gaussian_elimination();
+		    LU_solve();
 			break;
 		case 3:
-			LU_solve();
+			Gaussian_elimination();
 			break;
         case 4:
             Romberg();
