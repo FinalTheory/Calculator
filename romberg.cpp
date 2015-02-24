@@ -16,6 +16,7 @@ extern "C"
 #endif // __cplusplus
 
 static const int MAX = 12;
+static const double eps = 1e-8;
 
 int _pow( int x, int n )
 {
@@ -53,7 +54,7 @@ double worker( Function & f, double a, double b, Array_2D<double> & DP )
 			tmp = _pow(4, m);
 			DP[m][k] = ( DP[m - 1][k + 1] * tmp - DP[m - 1][k] ) / ( tmp - 1 );
 		}
-		if ( fabs(DP[i][0] - DP[i - 1][0]) < 1e-6 ) break;
+		if ( fabs(DP[i][0] - DP[i - 1][0]) < eps ) break;
 		i++;
 	}
 	// Ensure memory access is safe

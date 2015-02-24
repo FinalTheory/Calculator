@@ -63,14 +63,19 @@ start:
 
 // Insert your code down here:
 	char * algorithms[] = {
-	    "Jacobi iter",
-	    "Gauss Seidel iter",
-	    "Gaussian Elimination",
+	    "Jacobi iteration",
+	    "GaussSeidel iter",
 	    "LU Decomposition",
+	    "Gaussian Elimination",
 	    "Romberg Integration",
-	    "Test Function"
+	    "Test Function",
+	    "Test entry 1",
+	    "Test entry 2",
+	    "Test entry 3",
+	    "Test entry 4",
+	    "Test entry 5",
     };
-    int select = pop_menu(algorithms, "Select Algorithm:", 6, 0, 0);
+    int select = pop_menu(algorithms, "Select Algorithm:", 11, 2, 3);
 	switch (select)
 	{
 		case 0:
@@ -93,7 +98,7 @@ start:
             break;
 		default:
 			cout.clear();
-			cout << "Not avaliable, so sorry for this." << endl;
+			cout << "Not avaliable, sorry for this." << endl;
 			cout << "Press EXE or EXIT to return." << endl;
 	}
 

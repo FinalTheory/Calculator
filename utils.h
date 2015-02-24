@@ -26,6 +26,19 @@ Basic IO Usage
 #define PI 3.14159265
 #define CLR(arr,val) memset(arr,val,sizeof(arr))
 
+// max,min function
+template <typename Any>
+Any max( const Any & a, const Any & b ) {
+    if ( a >= b ) return a;
+    else return b;
+}
+
+template <typename Any>
+Any min( const Any & a, const Any & b ) {
+    if ( a <= b ) return a;
+    else return b;
+}
+
 // Swap function
 template <typename Any>
 void swap(Any & a, Any & b) {

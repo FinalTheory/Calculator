@@ -164,40 +164,44 @@ void area_clear (int left,int top,int right,int bottom,int sel)
     }
 }
 
-int pop_menu (char *context[],char *title,int max,int x,int y)
+int pop_menu ( char * context[], char * title, int total_rows, int x, int y )
 {
-    int width, height, i, l, redraw = 1, index = 0;
+    const int max_rows = 6;
+    int width, height, index = 0;
+    bool ReDraw = true;
     unsigned int key;
-    height = ( max + 1 ) * 8;
+    height = ( min(total_rows, max_rows) + 1 ) * 8;
     width = strlen(title);
-    for ( i = 0; i < max; ++i ) {
-        l = strlen(context[i]);
+    for ( int i = 0; i < total_rows; ++i ) {
+        int l = strlen(context[i]);
         if ( l > width ) width = l;
     }
     width *= 6;
-    area_clear(x,y,x+width+2,y+height+1,2);
-    PrintXY (x+1,y+1,(unsigned char*)title,0);
-    Bdisp_AreaReverseVRAM (x+1,y+1,x+width+1,y+8);
-    while (1){
-        if (redraw) {
-            redraw = 0;
-            area_clear(x+1,y+9,x+width+1,y+height,0);
-            for (i=0;i<max;++i)
-            PrintXY(x+1,y+1+(i+1)*8,(unsigned char *)context[i],0);
-            Bdisp_AreaReverseVRAM(x+1,y+1+(index+1)*8,x+width+1,y+(index+2)*8);
+    area_clear(x, y, x+width+2, y+height+1, 2);
+    PrintXY (x+1, y+1, (unsigned char*)title, 0);
+    Bdisp_AreaReverseVRAM (x+1, y+1, x+width+1, y+8);
+    while ( true ) {
+        if ( ReDraw ) {
+            ReDraw = false;
+            area_clear( x+1, y+9, x+width+1, y+height, 0 );
+            int start = (index / max_rows) * max_rows;
+            for ( int i = start; i < min(start + max_rows, total_rows); ++i )
+                PrintXY(x+1, y+1+(i-start+1)*8, (unsigned char *)context[i], 0);
+            Bdisp_AreaReverseVRAM(x+1, y+1+(index-start+1)*8, x+width+1, y+(index-start+2)*8);
         }
         GetKey(&key);
-        if (key==KEY_CTRL_UP){
+        if ( key == KEY_CTRL_UP ) {
             index--;
-            if (index<0) index = max-1;
-            redraw = 1;
-        }
-        else if (key==KEY_CTRL_DOWN){
+            if ( index < 0 ) index = total_rows - 1;
+            ReDraw = true;
+        } else if ( key == KEY_CTRL_DOWN ) {
            index++;
-           if (index>=max) index = 0;
-            redraw = 1;
+           if ( index >= total_rows ) index = 0;
+           ReDraw = true;
+        } else if ( key == KEY_CTRL_EXIT ) {
+            return -1;
+        } else if ( key == KEY_CTRL_EXE ) {
+            return index;
         }
-        else if (key==KEY_CTRL_EXIT) return -1;
-        else if (key==KEY_CTRL_EXE) return index;
     }
 }
