@@ -1,30 +1,6 @@
 #ifndef FUNCTION_H_INCLUDED
 #define FUNCTION_H_INCLUDED
 
-#ifndef TEST
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif // __cplusplus
-
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include <fxlib.h>
-
-#ifdef __cplusplus
-}
-#endif // __cplusplus
-
-#include "stack.h"
-
-#else
-#include <cstring>
-#include "keybios.h"
-#include "stack.h"
-#endif // TEST
-
 #define FUNC_LEN 128
 
 class Function

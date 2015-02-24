@@ -1,4 +1,17 @@
-#include "def.h"
+#include "function.h"
+#include "istream.h"
+#include "ostream.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
+#include <fxlib.h>
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 void Test_Function()
 {

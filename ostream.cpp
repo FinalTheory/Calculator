@@ -1,4 +1,19 @@
-#include "def.h"
+#include "ostream.h"
+#include "fraction.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
+#include <fxlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 ostream cout;
 

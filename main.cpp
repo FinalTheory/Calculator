@@ -1,4 +1,16 @@
-#include "def.h"
+#include "ostream.h"
+#include "istream.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
+#include <fxlib.h>
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 /*****************************************************************/
 /*                                                               */

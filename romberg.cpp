@@ -1,4 +1,19 @@
-#include "def.h"
+#include "istream.h"
+#include "ostream.h"
+#include "function.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
+#include <math.h>
+#include <string.h>
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
 const int MAX = 12;
 double DP[MAX][MAX];
 

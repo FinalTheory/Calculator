@@ -1,4 +1,6 @@
-#include "def.h"
+#include "fraction.h"
+#include "istream.h"
+#include "ostream.h"
 
 static Fraction A[8][8], b[8];
 

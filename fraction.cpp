@@ -1,4 +1,19 @@
-#include "def.h"
+#include "fraction.h"
+#include "utils.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 int gcd( int a, int b )
 {

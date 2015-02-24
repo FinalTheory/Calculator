@@ -1,4 +1,16 @@
-#include "def.h"
+#include "istream.h"
+#include "ostream.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
+#include <string.h>
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 static double A[8][8], b[8], x[8], x_prev[8];
 

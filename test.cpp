@@ -2,9 +2,11 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
+#include <cstring>
 #include <cmath>
 #include <sstream>
 #include "function.h"
+#include "keybios.h"
 
 // Note: test cases should all be lower case!!!
 

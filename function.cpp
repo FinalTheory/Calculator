@@ -1,10 +1,31 @@
 #include "function.h"
+#include "stack.h"
 
-#ifdef TEST
+#ifndef TEST
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <fxlib.h>
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
+#else // TEST
+
+#include "keybios.h"
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 void output_names( unsigned char * );
+
 #endif // TEST
 
 const int Function :: Priority[15][15] = {
@@ -41,6 +62,7 @@ bool is_digit( unsigned char ch ) {
 }
 
 void Function :: set_func( unsigned char * buf ) {
+    this->func_error = false;
     strcpy((char *)this->func_expr, (char *)buf);
 }
 
